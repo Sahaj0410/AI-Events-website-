@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import "./globals.css";
 import  {dark} from  "@clerk/themes"
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: "Gatherly",
@@ -43,6 +44,7 @@ export default function RootLayout({ children }) {
                     Made for educational purpose
                   </div>
                 </footer>
+                <Toaster richColors/>
               </main>
             </ThemeProvider>
           </ConvexClientProvider>

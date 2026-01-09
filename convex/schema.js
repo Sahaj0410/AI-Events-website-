@@ -1,7 +1,6 @@
 import {defineSchema,defineTable} from 'convex/server'
 import { v} from 'convex/values'
-import { sl } from 'date-fns/locale/sl'
-import { register } from 'next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup'
+
 
 
 export default defineSchema({
@@ -60,6 +59,7 @@ export default defineSchema({
         address: v.optional(v.string()),
         city: v.string(),
         state: v.optional(v.string()),
+        country: v.string(),
 
         // Capacity & Ticketing
         capacity:v.number(),
