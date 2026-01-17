@@ -11,6 +11,14 @@ import {Authenticated,Unauthenticated} from "convex/react";
 import {BarLoader} from "react-spinners";
 import { useStoreUser } from '@/hooks/use-store-user';
 import { Building, Plus, Ticket } from 'lucide-react';
+import  OnboardingModal  from './onboarding-modal';
+import { useOnboarding } from '@/hooks/use-onboarding';
+import dynamic from "next/dynamic";
+const SearchLocationBar = dynamic(
+  () => import("@/components/search-location-bar"),
+  { ssr: false }
+);
+
 
 
 
@@ -20,6 +28,8 @@ const {isLoading} =  useStoreUser();
 
 const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
 
+  const {showOnboarding,handleOnboardingComplete,handleOnboardingSkip} = useOnboarding()
+  
   return (
     <>
     <nav className='fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-xl z-20 border-b'>
@@ -42,6 +52,10 @@ const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
             </Link>
 
             {/* Search and location - desktop only */}
+            <div className='hidden md:flex flex-1 justify-center'>
+           <SearchLocationBar/>
+            </div>
+
 
             {/* Right side Actions */}
             <div className='flex items-center'>
@@ -101,6 +115,9 @@ const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
         </div>
 
         {/* Mobile Search & Location - Below Header */}
+        <div className='md:hidden border-t px-3 py-3'>
+           <SearchLocationBar/>
+            </div>
               
       {isLoading && (
         <div className="absolute bottom-0 left-0 w-full">
@@ -111,6 +128,11 @@ const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
     </nav>
 
     {/* models */}
+    <OnboardingModal
+    isOpen={showOnboarding}
+    onClose={handleOnboardingSkip}
+    onComplete={handleOnboardingComplete}
+    />
     </>
   )
 }
