@@ -5,15 +5,18 @@ import React, { use, useState } from 'react'
 import {
   SignInButton,
   UserButton,
+  useAuth,
 } from "@clerk/nextjs";
 import { Button } from './ui/button';
 import {Authenticated,Unauthenticated} from "convex/react";
 import {BarLoader} from "react-spinners";
 import { useStoreUser } from '@/hooks/use-store-user';
-import { Building, Plus, Ticket } from 'lucide-react';
+import { Building, Crown, Plus, Ticket } from 'lucide-react';
 import  OnboardingModal  from './onboarding-modal';
 import { useOnboarding } from '@/hooks/use-onboarding';
 import dynamic from "next/dynamic";
+import { Badge } from './ui/badge';
+import UpgradeModal from './upgrade-modal';
 const SearchLocationBar = dynamic(
   () => import("@/components/search-location-bar"),
   { ssr: false }
@@ -29,6 +32,9 @@ const {isLoading} =  useStoreUser();
 const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
 
   const {showOnboarding,handleOnboardingComplete,handleOnboardingSkip} = useOnboarding()
+
+  const {has} = useAuth();
+  const hasPro = has?.({plan: "pro"}); 
   
   return (
     <>
@@ -49,6 +55,12 @@ const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
             </div>
 
             {/* Pro badge */}
+            {hasPro && (
+              <Badge className="bg-linear-to-r from-pink-500 to-orange-500 
+              gap-1 text-white ml-3">
+                <Crown className='w-3 h-3'/> Pro
+                </Badge>
+            )}
             </Link>
 
             {/* Search and location - desktop only */}
@@ -59,12 +71,14 @@ const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
 
             {/* Right side Actions */}
             <div className='flex items-center'>
-                {/* Create event */}
-                 <Button variant={"ghost"} size='sm'
+              {!hasPro && (
+
+                <Button variant={"ghost"} size='sm'
                 onClick={()=>setShowUpgradeModal(true)}
                 >
                   Pricing 
                 </Button>
+                )}
                  <Button variant={"ghost"} size='sm'
                  asChild
                  className={"mr-2"}
@@ -132,6 +146,13 @@ const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
     isOpen={showOnboarding}
     onClose={handleOnboardingSkip}
     onComplete={handleOnboardingComplete}
+    />
+
+    <UpgradeModal
+    isOpen={showUpgradeModal}
+    onClose={()=>setShowUpgradeModal(false)}
+     trigger = 'header'
+
     />
     </>
   )

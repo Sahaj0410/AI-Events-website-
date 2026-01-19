@@ -1,0 +1,62 @@
+import React from 'react'
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Sparkles } from 'lucide-react'
+import { PricingTable } from '@clerk/nextjs'
+
+const UpgradeModal = ({isOpen,onClose,trigger = "limit"}) => {
+  return (
+ <Dialog open={isOpen} onOpenChange={onClose}>
+       
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <div className='flex items-center gap-2 mb-2'>
+                <Sparkles className='w-6 h-6 text-purple-500'/>
+            <DialogTitle>Upgrade to Pro</DialogTitle>
+            </div>
+            <DialogDescription>
+             {trigger === "header" && "Create Unlimited Events with Pro!"}
+             {trigger === "limit" && "You've reached your free event limit."}
+             {trigger === "color" && "Custom theme colors are a Pro feature."}
+             Unlock unlimited events and premium features!
+            </DialogDescription>
+          </DialogHeader>
+          <PricingTable
+          checkoutProps = {{
+              appearance : {
+                  elements : {
+                      drawerRoot : {
+                          zIndex: 2000,
+                        }
+                    }
+                }
+                
+            }}
+            />
+
+            <div className='flex-gap-3'>
+                <Button variant='outline'
+                onClick={onClose}
+                 className="flex-1">
+                    Maybe Later
+                 </Button>
+
+
+            </div>
+      
+        </DialogContent>
+    </Dialog>  )
+}
+
+export default UpgradeModal
