@@ -59,10 +59,21 @@ const eventSchema = z.object({
   state: z.string().optional(),
   capacity: z.number().min(1, "Capacity must be at least 1"),
   ticketType: z.enum(["free", "paid"]).default("free"),
-  ticketPrice: z.number().optional(),
+ticketPrice: z.number().optional().or(z.literal(undefined)),
   coverImage: z.string().optional(),
   themeColor: z.string().default("#1e3a8a"),
-});
+}) .superRefine((data, ctx) => {
+    if (data.ticketType === "paid" && !data.ticketPrice) {
+      ctx.addIssue({
+        path: ["ticketPrice"],
+        message: "Ticket price is required for paid events",
+       });
+    }
+
+    if (data.ticketType === "free") {
+      data.ticketPrice = undefined;
+    }
+  });
 
 export default function CreateEventPage() {
   const router = useRouter();
@@ -107,6 +118,13 @@ export default function CreateEventPage() {
   const startDate = watch("startDate");
   const endDate = watch("endDate");
   const coverImage = watch("coverImage");
+
+  useEffect(() => {
+  if (ticketType === "free") {
+    setValue("ticketPrice", undefined);
+  }
+}, [ticketType, setValue]);
+
 
   const indianStates = useMemo(() => State.getStatesOfCountry("IN"), []);
   const cities = useMemo(() => {
@@ -213,7 +231,7 @@ useEffect(() => {
 
 if (!mounted) return null;
 
-
+  
   return (
     <div
       className="min-h-screen transition-colors duration-300 px-6 py-8"
@@ -544,11 +562,14 @@ if (!mounted) return null;
             </div>
 
             {ticketType === "paid" && (
-              <Input
-                type="number"
-                placeholder="Ticket price ₹"
-                {...register("ticketPrice", { valueAsNumber: true })}
-              />
+               <Input
+    type="number"
+    placeholder="Ticket price ₹"
+    {...register("ticketPrice", {
+      valueAsNumber: true,
+      setValueAs: (v) => (v === "" ? undefined : Number(v)),
+    })}
+  />
             )}
           </div>
 
