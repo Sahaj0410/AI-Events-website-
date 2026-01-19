@@ -37,44 +37,6 @@ Gatherly is a modern **event creation & management platform** built with **Next.
 
 ### 1️⃣ Clone the Repository
 
-```bash
-git clone https://github.com/Sahaj0410/AI-Events-website-.git
-cd AI-Events-website-
-2️⃣ Install Dependencies
-npm install
-# or
-pnpm install
-# or
-yarn install
-3️⃣ Environment Variables
-Create a .env.local file in the root directory.
-
-# Convex
-CONVEX_DEPLOYMENT=dev:your-deployment-name
-NEXT_PUBLIC_CONVEX_URL=https://your-convex-deployment.convex.cloud
-
-# Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxxxxxxx
-CLERK_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxx
-
-NEXT_PUBLIC_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_SIGN_UP_URL=/sign-up
-CLERK_JWT_ISSUER_DOMAIN=https://your-clerk-domain.clerk.accounts.dev
-
-# Unsplash
-NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
-
-# Gemini AI
-GEMINI_API_KEY=your_gemini_api_key
-⚠️ Do not commit real secrets to GitHub.
-Make sure .env.local is listed in .gitignore.
-
-4️⃣ Run Convex (Backend)
-npx convex dev
-5️⃣ Run the App Locally
-npm run dev
-Open http://localhost:3000 in your browser 🚀
-
 📂 Project Structure
 ├── app/                 # Next.js App Router pages
 ├── components/          # Reusable UI components
@@ -126,19 +88,43 @@ Sahaj Paun
 Built with ❤️ using Next.js, Convex & Clerk
 
 
----
+```bash
+git clone https://github.com/Sahaj0410/AI-Events-website-.git
+cd AI-Events-website-
+2️⃣ Install Dependencies
+npm install
+# or
+pnpm install
+# or
+yarn install
+3️⃣ Environment Variables
+Create a .env.local file in the root directory.
 
-### ✅ What I fixed
-- Proper Markdown headings & spacing  
-- Correct code blocks (bash / env)  
-- Clear step-by-step flow  
-- Professional GitHub-ready formatting  
-- No secrets exposed  
+# Convex
+CONVEX_DEPLOYMENT=dev:your-deployment-name
+NEXT_PUBLIC_CONVEX_URL=https://your-convex-deployment.convex.cloud
 
-If you want, next I can:
-- Add **screenshots section**
-- Add **system architecture diagram**
-- Make it **resume / hackathon optimized**
-- Add **badges (Vercel, Next.js, License)**
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxxxxxxx
+CLERK_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxx
 
-Just tell me 👍
+NEXT_PUBLIC_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_SIGN_UP_URL=/sign-up
+CLERK_JWT_ISSUER_DOMAIN=https://your-clerk-domain.clerk.accounts.dev
+
+# Unsplash
+NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+
+# Gemini AI
+GEMINI_API_KEY=your_gemini_api_key
+⚠️ Do not commit real secrets to GitHub.
+Make sure .env.local is listed in .gitignore.
+
+4️⃣ Run Convex (Backend)
+npx convex dev
+5️⃣ Run the App Locally
+npm run dev
+Open http://localhost:3000 in your browser 🚀
+
+
+
