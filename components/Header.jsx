@@ -83,7 +83,7 @@ const  [showUpgradeModal,setShowUpgradeModal] = useState(false);
                  asChild
                  className={"mr-2"}
                 >
-                  <Link href={"explore"}>
+                  <Link href={"/explore"}>
                   Explore
                   </Link>
                 </Button>
