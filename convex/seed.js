@@ -1,4 +1,5 @@
 import { internalMutation } from "./_generated/server";
+import { internal } from "./_generated/api";
 
 // Sample events data with Unsplash images
 const SAMPLE_EVENTS = [

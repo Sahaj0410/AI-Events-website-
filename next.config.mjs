@@ -1,9 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images:{
-    domains: ["images.unsplash.com"]
-  }
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
+  turbopack: {
+    root: process.cwd(),
+  },
 };
 
 export default nextConfig;
